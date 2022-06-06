@@ -1,0 +1,21 @@
+name: pages
+on:
+  push:
+    branches: [main]
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1.0.6
+        with:
+          toolchain: stable
+          target: wasm32-unknown-unknown
+      - uses: jetli/trunk-action@v0.1.0
+      - name: run trunk
+        run: trunk build --release
+      - uses: peaceiris/actions-gh-pages@v3.7.3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: dist
