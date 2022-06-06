@@ -12,8 +12,7 @@ jobs:
           toolchain: stable
           target: wasm32-unknown-unknown
       - uses: jetli/trunk-action@v0.1.0
-      - name: run trunk
-        run: trunk build --release
+      - run: trunk build --release --public-url /disasm
       - uses: peaceiris/actions-gh-pages@v3.7.3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
