@@ -1,3 +1,5 @@
+#![feature(fn_traits)]
+
 use yew::prelude::*;
 
 #[function_component(App)]
