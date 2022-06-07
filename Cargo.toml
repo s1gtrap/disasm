@@ -4,4 +4,8 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+dasha = { git = "https://github.com/s1gtrap/dasha.git", branch = "main" }
+log = "0.4"
+wasm-logger = "0.2"
+web-sys = { version = "0.3", features = ["NodeList", "Range", "Selection"] }
 yew = "0.19"
