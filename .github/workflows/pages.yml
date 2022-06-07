@@ -8,8 +8,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: jetli/trunk-action@v0.1.0
-      - run: rustup target add wasm32-unknown-unknown
-      - run: trunk build --release --public-url /disasm
+      - name: run trunk
+        run: |
+          rustup default nightly
+          rustup target add wasm32-unknown-unknown
+          trunk build --release --public-url /disasm
       - uses: peaceiris/actions-gh-pages@v3.7.3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
