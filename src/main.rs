@@ -6,18 +6,20 @@ mod editor;
 
 #[function_component(App)]
 fn app() -> Html {
-    let content = use_state(|| String::from("hello world\nWhat's up!??"));
+    let asm = use_state(|| vec![]);
     let onchange = {
-        let content = content.clone();
-        Callback::from(move |c| {
-            log::info!("got onchange: {:?}", c);
-            content.set(c)
+        let asm = asm.clone();
+        Callback::from(move |c: String| {
+            let insts = dasha::text::tokenize(&c).unwrap();
+            log::info!("got onchange: {:?}", insts);
+            asm.set(insts)
         })
     };
     html! {
         <>
             <h1>{ "Hello World" }</h1>
             <editor::Editor content={"00 00"} {onchange} />
+            { format!("{:?}", *asm) }
         </>
     }
 }
